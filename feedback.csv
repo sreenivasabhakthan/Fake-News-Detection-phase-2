@@ -1,0 +1,13 @@
+timestamp,text,prediction,confidence,user_feedback
+2025-11-09 00:04:31,"BJP MLA, security personnel clash at Banaras station during PM's visit ·",LABEL_1,99.87120628356934,Wrong
+2025-11-09 00:04:59,Six dead as Russia hits energy and residential sites in Ukraine,LABEL_0,96.14774584770204,Correct
+2025-11-09 00:05:19,UPS and FedEx ground some cargo planes after Kentucky air disaster,LABEL_1,79.5402467250824,Wrong
+2025-11-09 00:08:43,UPS and FedEx ground some cargo planes after Kentucky air disaster,LABEL_1,98.42482209205627,Wrong
+2025-11-09 00:09:00,"New typhoon bears down on Philippines days after deadly storm
+",LABEL_1,99.8854398727417,Wrong
+2025-11-09 00:14:04,UK seeks Danish inspiration to shake up immigration system,LABEL_0,87.87176012992859,Correct
+2025-11-09 00:21:24,Delhi enters red zone: Citizens choking on 'severe' air quality - why GRAP 3 not yet enforced?,LABEL_1,80.56927919387817,Wrong
+2025-11-09 00:25:24,"Air quality in Delhi nears 'severe' mark, 15 stations report 400+ AQI",LABEL_0,99.6422827243805,Correct
+2025-11-09 00:26:27,"In Israel, Zohran Mamdani's win in New York stirs alarm over shifting U.S. attitudes",LABEL_0,95.04709839820862,Correct
+2025-11-09 00:27:16,Tomorrow public holiday for students including professional colleges and other government institutions,LABEL_1,99.92367029190063,Correct
+2025-11-09 16:04:02,‘Patriotic’ or ‘RSS’? Row over song by Kerala school students on Vande Bharat Express,LABEL_0,99.99529123306274,Correct

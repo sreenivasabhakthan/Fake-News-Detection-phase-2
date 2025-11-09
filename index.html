@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Verifier Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-light: #f8fafc;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Animative Background --- */
+        .bg-orb {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+        .orb-1 { background: #4f46e5; top: -200px; left: -200px; }
+        .orb-2 { background: #ec4899; bottom: -200px; right: -200px; animation-delay: -10s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(100px, 50px); }
+        }
+
+        /* --- Main UI --- */
+        .app-container {
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            padding: 40px;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.7); /* Glass effect */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+             box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.6);
+             border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #fff 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            color: white;
+            font-size: 16px;
+            font-family: inherit;
+            resize: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .btn-primary {
+            width: 100%;
+            margin-top: 20px;
+            padding: 16px;
+            background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px var(--primary-glow);
+        }
+
+        /* --- Result Styles --- */
+        .result-placeholder {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.3);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .result-active {
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+        }
+        .status-fake {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.2);
+        }
+        .status-real {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.2);
+        }
+
+        .confidence-meter {
+            margin: 30px 0;
+        }
+        .meter-bg {
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .meter-fill {
+            height: 100%;
+            width: 88%; /* Example value */
+            background: linear-gradient(90deg, #ef4444, #f87171);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+            animation: fillMeter 1.5s ease-out;
+        }
+        @keyframes fillMeter { from { width: 0; } }
+
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <div class="app-container">
+        <!-- Left Col: Input -->
+        <div class="card">
+            <h1>News Verifier</h1>
+            <p style="color: #94a3b8; margin-bottom: 30px;">AI-powered deep learning analysis for content credibility.</p>
+            <textarea placeholder="Paste article headline or content here..."></textarea>
+            <button class="btn-primary">Analyze Content ✨</button>
+        </div>
+
+        <!-- Right Col: Result PREVIEW (Fake Example) -->
+        <div class="card">
+            <!-- This part would be dynamic in React -->
+            <div class="result-active">
+                <div style="color: #94a3b8; font-weight: 600; margin-bottom: 10px;">ANALYSIS RESULT</div>
+                <div><span class="status-badge status-fake">LIKELY FAKE</span></div>
+                
+                <div style="font-size: 3.5rem; font-weight: 800; line-height: 1;">88.4%</div>
+                <div style="color: #94a3b8; margin-bottom: 20px;">Confidence Score</div>
+                
+                <div class="confidence-meter">
+                    <div class="meter-bg">
+                        <div class="meter-fill" style="width: 88.4%"></div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 30px;">
+                    <div style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">WAS THIS ACCURATE?</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <button style="padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; cursor: pointer;">👍 Yes</button>
+                         <button style="padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; cursor: pointer;">👎 No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

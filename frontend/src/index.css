@@ -1,0 +1,33 @@
+:root {
+  --primary: #6366f1;
+  --primary-glow: rgba(99, 102, 241, 0.4);
+  --bg-dark: #0f172a;
+  --text-light: #f8fafc;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background Animation */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  z-index: -1;
+  animation: floatOrb 20s ease-in-out infinite;
+}
+.orb1 { top: -10%; left: -10%; width: 600px; height: 600px; background: #4f46e5; }
+.orb2 { bottom: -10%; right: -10%; width: 500px; height: 500px; background: #ec4899; animation-delay: -5s; }
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(50px, 50px) scale(1.1); }
+}
